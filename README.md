@@ -1,12 +1,12 @@
 # 紐約時報行動軟體團隊的Objective-C程式碼撰寫風格手冊
 
-這份手冊摘要描述紐約時報iOS開發團隊的程式碼書寫慣例。歡迎各位回饋意見，[提出問題](https://github.com/NYTimes/objetive-c-style-guide/issues)、[提出pull請求](https://github.com/NYTimes/objetive-c-style-guide/pulls)、以及[發推文](https://twitter.com/nytimesmobile)，另外，我們正進行[招募中](http://jobs.nytco.com/job/New-York-iOS-Developer-Job-NY/2572221/)。
+這份手冊摘要描述紐約時報iOS開發團隊的程式碼書寫慣例。歡迎各位回饋意見，[提出問題](https://github.com/NYTimes/objetive-c-style-guide/issues)、[提出pull請求](https://github.com/NYTimes/objetive-c-style-guide/pulls)、以及[發推文](https://twitter.com/nytimesmobile)，另外，我們正[招募中](http://jobs.nytco.com/job/New-York-iOS-Developer-Job-NY/2572221/)。
 
 感謝所有的[貢獻者](https://github.com/NYTimes/objective-c-style-guide/contributors)。
 
 ## 導論
 
-底下是一些Apple公司關於程式碼風格與慣例的文件，若你發現某事項本手冊並未提及，通常都能在這些文件裡找到詳細的描述。
+底下列出一些Apple公司關於程式碼風格與慣例的文件，若你發現某事項本手冊並未提及，通常都能在這些文件裡找到詳細的描述。
 
 * [The Objective-C Programming Language](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjectiveC/Introduction/introObjectiveC.html)
 * [Cocoa Fundamentals Guide](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CocoaFundamentals/Introduction/Introduction.html)
@@ -16,25 +16,25 @@
 ## 目錄
 
 * [句點標記法的語法（Dot-Notation Syntax）](#dot-notation-syntax)
-* [空格與縮排](#spacing)
-* [條件判斷](#conditionals)
-* [方法](#methods)
-* [變數](#variables)
-* [命名](#naming)
-  * [底線](#underscores)
-* [註解](#comments)
-* [init初始化與dealloc解構式](#init-and-dealloc)
-* [字面值（literal）](#literals)
-* [CGRect函式](#cgrect-functions)
-* [常數](#constants)
-* [列矩型別](#enumerated-types)
-* [私有屬性](#private-properties)
-* [圖檔命名](#image-naming)
-* [布林（boolean）](#booleans)
-* [單件設計模式（singleton）](#singletons)
-* [Xcode專案](#xcode-project)
+* [空格與縮排（Spacing）](#spacing)
+* [條件判斷（Conditionals）](#conditionals)
+* [方法（Methods）](#methods)
+* [變數（Variables）](#variables)
+* [命名（Naming）](#naming)
+  * [底線（Underscores）](#underscores)
+* [註解（Comments）](#comments)
+* [初始化與解構式（init and dealloc）](#init-and-dealloc)
+* [字面值（Literals）](#literals)
+* [CGRect函式（CGRect Functions）](#cgrect-functions)
+* [常數（Constants）](#constants)
+* [列舉型別（Enumerated Types）](#enumerated-types)
+* [私有屬性（Private Properties）](#private-properties)
+* [圖檔命名（Image Naming）](#image-naming)
+* [布林（Booleans）](#booleans)
+* [單件設計模式（Singletons）](#singletons)
+* [Xcode專案（Xcode project）](#xcode-project)
 
-## Dot-Notation Syntax
+## 句點標記法的語法（Dot-Notation Syntax）
 
 使用句點標記法的地方一定是想要存取與改變屬性的時候，任何其他地方應採用方括號標記法。
 
@@ -50,7 +50,7 @@ view.backgroundColor = [UIColor orangeColor];
 UIApplication.sharedApplication.delegate;
 ```
 
-## Spacing
+## 空格與縮排（Spacing）
 
 * 縮排時使用4個空白，千萬不要使用tab鍵，記得在Xcode的偏好設定裡啟用此選項。
 * 方法的大括號與其他程式構件的大括號（`if`/`else`/`switch`/`while`等等），左大括號必須跟程式構件位於同一行，但右大括號則位於新的一行。
@@ -67,7 +67,7 @@ else {
 * 方法之間必須恰好相隔一個空白行，有助於程式碼整體組織性與視覺辨識。方法內也可用空白行區隔功能，但碰到這種情況時，通常就是該分出新方法的時候。
 * 在實作裡的`@synthesize`與`@dynamic`，每個必須單獨宣告佔據一行。
 
-## Conditionals
+## 條件判斷（Conditionals）
 
 條件判斷的主體一定要包在大括號裡，就算是能省略大括號（也就是說，主體只有一行），可避免各種
 [錯誤](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256)，常見錯誤包括，之後加入第二行程式碼卻以為它會被if述句所涵蓋， 另一個會出錯且[更加危險的錯誤](http://programmers.stackexchange.com/a/16530)是，當if述句「裡」唯一一行程式碼被註解掉後，下一行卻變成if述句的主體了。另外，這項書寫慣例能與其他條件判斷式保持一致性，檢查程式碼時更容易被找出錯誤。
@@ -91,7 +91,7 @@ if (!error)
 if (!error) return success;
 ```
 
-## Methods
+## 方法（Methods）
 
 方法宣告時，在-/+符號之後必須是一個空白。方法每個參數區段之間必須相隔一個空白。  
 
@@ -99,7 +99,7 @@ if (!error) return success;
 ```objc  
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```
-## Variables
+## 變數（Variables）
 
 盡量以淺顯易懂的方式命名變數，避免使用只有一個字元的變數名，除了在`for()`裡。
 
@@ -125,7 +125,7 @@ if (!error) return success;
 }
 ```
 
-## Naming
+## 命名（Naming）
 
 不論如何，都應該盡量遵守Apple的命名規則，特別是關於[記憶體管理](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html) ([NARC](http://stackoverflow.com/a/2865194/340508))部份的規則。
 
@@ -172,21 +172,21 @@ static const NSTimeInterval fadetime = 1.7;
 id varnm;
 ```
 
-### Underscores
+### 底線（Underscores）
 
 使用屬性時，一定使用`self.`來存取實體變數，這麼一來，一看就能看出所有的屬性，因為其前頭都有`self.`。區域變數不該含有底線。
 
-## Comments
+## 註解（Comments）
 
 當需要寫註解時，其功用應該是試著解釋「為什麼」這一段程式碼做了某件事。任何註解都應該隨時更新，否則就該刪除。
 
 一般來說，應避免使用區塊型註解，因為程式碼應盡量保持「一看就能明白」的樣子，只需要偶爾插入少數幾行的說明描述即可。但這項慣例不適用於用來產生文件的註解。
 
-## init and dealloc
+## 初始化與解構式（init and dealloc）
 
 `dealloc`方法應位於實作的最上方，緊跟著 `@synthesize`與`@dynamic`，而`init`方法應置於`dealloc` 之下。
 
-## Literals
+## 字面值（Literals）
 
 建立`NSString`、`NSDictionary`、`NSArray`、與`NSNumber`的不可變物件時，應使用其字面值。請特別注意， 不可將`nil`值放進`NSArray`與`NSDictionary`的字面值，將會導致當掉。
 
@@ -208,7 +208,7 @@ NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
 NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];
 ```
 
-## CGRect Functions
+## CGRect函式（CGRect Functions）
 
 存取`CGRect`的`x`、`y`、`width`、或`height`時，一律使用[`CGGeometry`函式](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html)，而不要直接存取結構成員。摘錄Apple的`CGGeometry`參考文件：
 
@@ -236,7 +236,7 @@ CGFloat width = frame.size.width;
 CGFloat height = frame.size.height;
 ```
 
-## Constants
+## 常數（Constants）
 
 比起在程式碼裡直接寫入字串字面值或數字，較佳的作法是使用常數，這麼一來便能輕易地重複使用，想修改時也很方便，不需要大海撈針逐一更動。常數應宣告為`static`常數、而不是以`#define`定義，除非是作為巨集之用。
 
@@ -256,7 +256,7 @@ static const CGFloat NYTImageThumbnailHeight = 50.0;
 #define thumbnailHeight 2
 ```
 
-## Enumerated Types
+## 列舉型別（Enumerated Types）
 
 使用`enum`時，建議使用擁有底層固定型別的新型宣告，因為可得到更佳的型別檢查與程式碼補齊功能；SDK裡含有巨集`NS_ENUM()`，方便我們加以運用。
 
@@ -269,7 +269,7 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
 };
 ```
 
-## Private Properties
+## 私有屬性（Private Properties）
 
 私有屬性應宣告在類別實作檔裡的類別延伸（class extension）裡，也就是無名類目（anonymous category），不該使用有名的類目（例如`NYTPrivate`或`private`），除非你想要延伸擴充某類別。
 
@@ -285,7 +285,7 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
 @end
 ```
 
-## Image Naming
+## 圖檔命名（Image Naming）
 
 請務必讓圖檔名保持一致性，便於管理，才不會讓開發人員發瘋，應採用駝峰式大小寫命名法，首先詳細地描述出該圖檔的用途，然後跟著與它們相關、不帶有前置字串的類別名或屬性名（若有的話），然後跟著顏色、編排等資訊，最後是圖檔的狀態。
 
@@ -296,7 +296,7 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
 
 用途類似的圖檔，應置於Images目錄下，分門別類放在相對應的群組之下。
 
-## Booleans
+## 布林（Booleans）
 
 因為`nil`會被決議成`NO`，所以在條件判斷時並必須要與之作比較。千萬不要將某物直接與`YES`作比較，因為`YES`被定義為1，而`BOOL`可能是8位元的任何值。
 
@@ -341,7 +341,7 @@ if (isAwesome == YES) // 千萬別這麼寫
 ```
 描述與範例取自[Cocoa Naming Guidelines](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE)。
 
-## Singletons
+## 單件設計模式（Singletons）
 
 建立共享的單件物件時，應使用執行緒安全的寫法。
 Singleton objects should use a thread-safe pattern for creating their shared instance.
@@ -359,7 +359,7 @@ Singleton objects should use a thread-safe pattern for creating their shared ins
 ```
 這麼做可免除[各種可能出現的臭蟲與錯誤] (http://cocoasamurai.blogspot.com/2011/04/singletons-your-doing-them-wrong.html)。
 
-## Xcode project
+## Xcode專案（Xcode project）
 
 實體檔案應隨時與Xcode專案檔保持同步，避免檔案四處流散；Xcode專案裡的群組（group）必須在檔案系統中有其相對應的目錄；不僅要根據類型區分程式碼，也要根據功能加以劃分，使之更為清晰。
 
