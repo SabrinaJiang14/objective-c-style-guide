@@ -15,7 +15,7 @@
 
 ## 目錄
 
-* [句點標記法的語法（Dot-Notation Syntax）](#dot-notation-syntax)
+* [句點標記法的語法（Dot-Notation Syntax）](#句點標記法的語法（Dot-Notation Syntax）)
 * [空格與縮排（Spacing）](#spacing)
 * [條件判斷（Conditionals）](#conditionals)
 * [方法（Methods）](#methods)
