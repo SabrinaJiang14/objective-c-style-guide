@@ -1,50 +1,50 @@
 # 紐約時報行動軟體團隊的Objective-C程式碼撰寫風格手冊
 
-這份手冊描繪出紐約時報iOS開發團隊的程式碼書寫慣例。歡迎各位回饋意見，[提出問題](https://github.com/NYTimes/objetive-c-style-guide/issues)、[提出pull請求](https://github.com/NYTimes/objetive-c-style-guide/pulls)、以及[發推文](https://twitter.com/nytimesmobile)，另外，我們正進行[招募中](http://jobs.nytco.com/job/New-York-iOS-Developer-Job-NY/2572221/)。
+這份手冊摘要描述紐約時報iOS開發團隊的程式碼書寫慣例。歡迎各位回饋意見，[提出問題](https://github.com/NYTimes/objetive-c-style-guide/issues)、[提出pull請求](https://github.com/NYTimes/objetive-c-style-guide/pulls)、以及[發推文](https://twitter.com/nytimesmobile)，另外，我們正進行[招募中](http://jobs.nytco.com/job/New-York-iOS-Developer-Job-NY/2572221/)。
 
 感謝所有的[貢獻者](https://github.com/NYTimes/objective-c-style-guide/contributors)。
 
 ## 導論
 
-Here are some of the documents from Apple that informed the style guide. If something isn't mentioned here, it's probably covered in great detail in one of these:
+底下是一些Apple公司關於程式碼風格與慣例的文件，若你發現某事項本手冊並未提及，通常都能在這些文件裡找到詳細的描述。
 
 * [The Objective-C Programming Language](http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/ObjectiveC/Introduction/introObjectiveC.html)
 * [Cocoa Fundamentals Guide](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CocoaFundamentals/Introduction/Introduction.html)
 * [Coding Guidelines for Cocoa](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html)
 * [iOS App Programming Guide](http://developer.apple.com/library/ios/#documentation/iphone/conceptual/iphoneosprogrammingguide/Introduction/Introduction.html)
 
-## Table of Contents
+## 目錄
 
-* [Dot-Notation Syntax](#dot-notation-syntax)
-* [Spacing](#spacing)
-* [Conditionals](#conditionals)
-* [Methods](#methods)
-* [Variables](#variables)
-* [Naming](#naming)
-  * [Underscores](#underscores)
-* [Comments](#comments)
-* [Init & Dealloc](#init-and-dealloc)
-* [Literals](#literals)
-* [CGRect Functions](#cgrect-functions)
-* [Constants](#constants)
-* [Enumerated Types](#enumerated-types)
-* [Private Properties](#private-properties)
-* [Image Naming](#image-naming)
-* [Booleans](#booleans)
-* [Singletons](#singletons)
-* [Xcode Project](#xcode-project)
+* [句點標記法的語法（Dot-Notation Syntax）](#dot-notation-syntax)
+* [空格與縮排](#spacing)
+* [條件判斷](#conditionals)
+* [方法](#methods)
+* [變數](#variables)
+* [命名](#naming)
+  * [底線](#underscores)
+* [註解](#comments)
+* [init初始化與dealloc解構式](#init-and-dealloc)
+* [字面值（literal）](#literals)
+* [CGRect函式](#cgrect-functions)
+* [常數](#constants)
+* [列矩型別](#enumerated-types)
+* [私有屬性](#private-properties)
+* [圖檔命名](#image-naming)
+* [布林（boolean）](#booleans)
+* [單件設計模式（singleton）](#singletons)
+* [Xcode專案](#xcode-project)
 
 ## Dot-Notation Syntax
 
-Dot-notation should **always** be used for accessing and mutating properties. Bracket notation is preferred in all other instances.
+使用句點標記法的地方一定是想要存取與改變屬性的時候，任何其他地方應採用方括號標記法。
 
-**For example:**  
+**譬如應該如下這樣寫：**  
 ```objc
 view.backgroundColor = [UIColor orangeColor];
 [UIApplication sharedApplication].delegate;
 ```
 
-**Not:**
+**而不是這樣寫：**
 ```objc
 [view setBackgroundColor:[UIColor orangeColor]];
 UIApplication.sharedApplication.delegate;
@@ -52,20 +52,20 @@ UIApplication.sharedApplication.delegate;
 
 ## Spacing
 
-* Indent using 4 spaces. Never indent with tabs. Be sure to set this preference in Xcode.
-* Method braces and other braces (`if`/`else`/`switch`/`while` etc.) always open on the same line as the statement but close on a new line.
+* 縮排時使用4個空白，千萬不要使用tab鍵，記得在Xcode的偏好設定裡啟用此選項。
+* 方法的大括號與其他程式構件的大括號（`if`/`else`/`switch`/`while`等等），左大括號必須跟程式構件位於同一行，但右大括號則位於新的一行。
 
-**For example:**  
+**例如：**  
 ```objc
 if (user.isHappy) {
-//Do something
+//作事情
 }
 else {
-//Do something else
+//作事情
 }
 ```
-* There should be exactly one blank line between methods to aid in visual clarity and organization. Whitespace within methods should separate functionality, but often there should probably be new methods.
-* `@synthesize` and `@dynamic` should each be declared on new lines in the implementation.
+* 方法之間必須恰好相隔一個空白行，有助於程式碼整體組織性與視覺辨識。方法內也可用空白行區隔功能，但碰到這種情況時，通常就是該分出新方法的時候。
+* 在實作裡的`@synthesize`與`@dynamic`，每個必須單獨宣告佔據一行。
 
 ## Conditionals
 
@@ -362,9 +362,9 @@ The physical files should be kept in sync with the Xcode project files in order 
 
 When possible, always turn on "Treat Warnings as Errors" in the target's Build Settings and enable as many [additional warnings](http://boredzo.org/blog/archives/2009-11-07/warnings) as possible. If you need to ignore a specific warning, use [Clang's pragma feature](http://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas).
 
-# Other Objective-C Style Guides
+# 其他關於Objective-C程式碼撰寫風格的手冊
 
-If ours doesn't fit your tastes, have a look at some other style guides:
+如果我們的規範並不符合您的口味，請看看其他人的風格手冊：
 
 * [Google](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml)
 * [GitHub](https://github.com/github/objective-c-conventions)
