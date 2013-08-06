@@ -1,10 +1,10 @@
-# NYTimes Objective-C Style Guide
+# 紐約時報行動軟體團隊的Objective-C程式碼撰寫風格手冊
 
-This style guide outlines the coding conventions of the iOS team at The New York Times. We welcome your feedback in [issues](https://github.com/NYTimes/objetive-c-style-guide/issues), [pull requests](https://github.com/NYTimes/objetive-c-style-guide/pulls), and [tweets](https://twitter.com/nytimesmobile). Also, [we're hiring](http://jobs.nytco.com/job/New-York-iOS-Developer-Job-NY/2572221/).
+這份手冊描繪出紐約時報iOS開發團隊的程式碼書寫慣例。歡迎各位回饋意見，[提出問題](https://github.com/NYTimes/objetive-c-style-guide/issues)、[提出pull請求](https://github.com/NYTimes/objetive-c-style-guide/pulls)、以及[發推文](https://twitter.com/nytimesmobile)，另外，我們正進行[招募中](http://jobs.nytco.com/job/New-York-iOS-Developer-Job-NY/2572221/)。
 
-Thanks to all of [our contributors](https://github.com/NYTimes/objective-c-style-guide/contributors).
+感謝所有的[貢獻者](https://github.com/NYTimes/objective-c-style-guide/contributors)。
 
-## Introduction
+## 導論
 
 Here are some of the documents from Apple that informed the style guide. If something isn't mentioned here, it's probably covered in great detail in one of these:
 
