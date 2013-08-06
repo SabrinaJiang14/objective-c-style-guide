@@ -69,22 +69,23 @@ else {
 
 ## Conditionals
 
-Conditional bodies should always use braces even when a conditional body could be written without braces (i.e., it is one line only) to prevent [errors](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256). These errors include adding a second line and expecting it to be part of the if-statement. Another, [even more dangerous defect](http://programmers.stackexchange.com/a/16530) may happen where the line "inside" the if-statement is commented out, and the next line unwittingly becomes part of the if-statement. In addition, this style is more consistent with all other conditionals, and therefore more easily scannable.
+條件判斷的主體一定要包在大括號裡，就算是能省略大括號（也就是說，主體只有一行），可避免各種
+[錯誤](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256)，常見錯誤包括，之後加入第二行程式碼卻以為它會被if述句所涵蓋， 另一個會出錯且[更加危險的錯誤](http://programmers.stackexchange.com/a/16530)是，當if述句「裡」唯一一行程式碼被註解掉後，下一行卻變成if述句的主體了。另外，這項書寫慣例能與其他條件判斷式保持一致性，檢查程式碼時更容易被找出錯誤。
 
-**For example:**
+**譬如：**
 ```objc
 if (!error) {
     return success;
 }
 ```
 
-**Not:**
+**而不是：**
 ```objc
 if (!error)
     return success;
 ```
 
-or  
+或  
 
 ```objc
 if (!error) return success;
@@ -92,21 +93,21 @@ if (!error) return success;
 
 ## Methods
 
-In method signatures, there should be a space after the scope (-/+ symbol). There should be a space between the method segments.  
+方法宣告時，在-/+符號之後必須是一個空白。方法每個參數區段之間必須相隔一個空白。  
 
-**For Example**:  
+**例如：**:  
 ```objc  
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```
 ## Variables
 
-Variables should be named as descriptively as possible. Single letter variable names should be avoided except in `for()` loops. 
+盡量以淺顯易懂的方式命名變數，避免使用只有一個字元的變數名，除了在`for()`裡。
 
-Asterisks indicating pointers belong with the variable, i.e. `NSString *text` not `NSString* text` or `NSString * text`, except in the case of constants.
+星號指出指標屬於變數，例如`NSString *text`，而不是`NSString* text`或`NSString * text`，除非碰到常數的情況。
 
-Property definitions should be used in place of naked instance variables whenever possible. Direct instance variable access should be avoided except in initializer methods (`init`, `initWithCoder:`, etc…), `dealloc` methods and within custom setters and getters. For more information on using Accessor Methods in Initializer Methods and dealloc, see [here](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6).
+只要可以，都應該以屬性定義取代單純的實體變數。應避免直接存取實體變數，除了在初始化方法（`init`、`initWithCoder:`、等等）、dealloc方法、以及自訂的取值子與設值子方法。關於在初始化方法與dealloc方法裡使用存取子方法，更多細節請見[這裡](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6)。
 
-**For example:**  
+**例如：**  
 
 ```objc
 @interface NYTSection: NSObject
@@ -116,7 +117,7 @@ Property definitions should be used in place of naked instance variables wheneve
 @end
 ```
 
-**Not:**
+**而不是：**
 
 ```objc
 @interface NYTSection : NSObject {
@@ -126,45 +127,46 @@ Property definitions should be used in place of naked instance variables wheneve
 
 ## Naming
 
-Apple naming conventions should be adhered to wherever possible, especially those related to [memory management rules](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html) ([NARC](http://stackoverflow.com/a/2865194/340508)). 
+不論如何，都應該盡量遵守Apple的命名規則，特別是關於[記憶體管理](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/MemoryMgmt/Articles/MemoryMgmt.html) ([NARC](http://stackoverflow.com/a/2865194/340508))部份的規則。
 
-Long, descriptive method and variable names are good. 
+夠長且一看就懂的方法名與變數名，是好事。 
 
-**For example:**  
+**例如：**  
 
 ```objc
 UIButton *settingsButton;
 ```
 
-**Not**  
+**而不是：**  
 
 ```objc
 UIButton *setBut;
 ```
 
-A three letter prefix (e.g. `NYT`) should always be used for class names and constants, however may be omitted for Core Data entity names. Constants should be camel-case with all words capitalized and prefixed by the related class name for clarity. 
+類別名與常數應冠上由三字母組成的字頭（譬如NYT），但Core Data的entity名可省略。常數應採用駝峰式大小寫命名法，每個單字的第一個字母應大寫，為了清楚起見冠上相關的類別名。
 
-**For example:**  
+
+**例如：**  
 
 ```objc
 static const NSTimeInterval NYTArticleViewControllerNavigationFadeAnimationDuration = 0.3;
 ```
 
-**Not:**
+**而不是：**
 
 ```objc
 static const NSTimeInterval fadetime = 1.7;
 ```
 
-Properties should be camel-case with the leading word being lowercase. **If Xcode can automatically synthesize the variable, then let it.** Otherwise, in order to be consistent, the backing instance variables for these properties should be camel-case with the leading word being lowercase and a leading underscore. This is the same format as Xcode's default synthesis.
+屬性名也採用駝峰式大小寫命名法，但開頭單字應小寫，注意：若Xcode能自動合成實體變數，就讓它負責；否則，屬性背後的實體變數的名字，應採用駝峰式大小寫命名法但開頭單字小寫，並加上底線（_），這也是Xcode合成名字時的預設規則。
 
-**For example:**  
+**例如：**  
 
 ```objc
 @synthesize descriptiveVariableName = _descriptiveVariableName;
 ```
 
-**Not:**
+**而不是：**
 
 ```objc
 id varnm;
@@ -172,23 +174,23 @@ id varnm;
 
 ### Underscores
 
-When using properties, instance variables should always be accessed and mutated using `self.`. This means that all properties will be visually distinct, as they will all be prefaced with `self.`. Local variables should not contain underscores.
+使用屬性時，一定使用`self.`來存取實體變數，這麼一來，一看就能看出所有的屬性，因為其前頭都有`self.`。區域變數不該含有底線。
 
 ## Comments
 
-When they are needed, comments should be used to explain **why** a particular piece of code does something. Any comments that are used must be kept up-to-date or deleted.
+當需要寫註解時，其功用應該是試著解釋「為什麼」這一段程式碼做了某件事。任何註解都應該隨時更新，否則就該刪除。
 
-Block comments should generally be avoided, as code should be as self-documenting as possible, with only the need for intermittent, few-line explanations. This does not apply to those comments used to generate documentation.
+一般來說，應避免使用區塊型註解，因為程式碼應盡量保持「一看就能明白」的樣子，只需要偶爾插入少數幾行的說明描述即可。但這項慣例不適用於用來產生文件的註解。
 
 ## init and dealloc
 
-`dealloc` methods should be placed at the top of the implementation, directly after the `@synthesize` and `@dynamic` statements. `init` should be placed directly below the `dealloc` methods of any class.
+`dealloc`方法應位於實作的最上方，緊跟著 `@synthesize`與`@dynamic`，而`init`方法應置於`dealloc` 之下。
 
 ## Literals
 
-`NSString`, `NSDictionary`, `NSArray`, and `NSNumber` literals should be used whenever creating immutable instances of those objects. Pay special care that `nil` values not be passed into `NSArray` and `NSDictionary` literals, as this will cause a crash.
+建立`NSString`、`NSDictionary`、`NSArray`、與`NSNumber`的不可變物件時，應使用其字面值。請特別注意， 不可將`nil`值放進`NSArray`與`NSDictionary`的字面值，將會導致當掉。
 
-**For example:**  
+**例如：**  
 
 ```objc
 NSArray *names = @[@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul"];
@@ -197,7 +199,7 @@ NSNumber *shouldUseLiterals = @YES;
 NSNumber *buildingZIPCode = @10018;
 ```
 
-**Not:**  
+**而不是：**  
 
 ```objc
 NSArray *names = [NSArray arrayWithObjects:@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul", nil];
@@ -208,11 +210,11 @@ NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];
 
 ## CGRect Functions
 
-When accessing the `x`, `y`, `width`, or `height` of a `CGRect`, always use the [`CGGeometry` functions](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html) instead of direct struct member access. From Apple's `CGGeometry` reference:
+存取`CGRect`的`x`、`y`、`width`、或`height`時，一律使用[`CGGeometry`函式](http://developer.apple.com/library/ios/#documentation/graphicsimaging/reference/CGGeometry/Reference/reference.html)，而不要直接存取結構成員。摘錄Apple的`CGGeometry`參考文件：
 
-> All functions described in this reference that take CGRect data structures as inputs implicitly standardize those rectangles before calculating their results. For this reason, your applications should avoid directly reading and writing the data stored in the CGRect data structure. Instead, use the functions described here to manipulate rectangles and to retrieve their characteristics.
+> 本參考文件中，所有接受CGRect資料結構作為輸入的函式，都會暗中將這些矩形予以標準化，所以，您的程式碼應避免直接讀寫存放在CGRect裡的資料，反之，請使用此處列出的函式來操作矩形與各項特性。
 
-**For example:**  
+**例如：**  
 
 ```objc
 CGRect frame = self.view.frame;
@@ -223,7 +225,7 @@ CGFloat width = CGRectGetWidth(frame);
 CGFloat height = CGRectGetHeight(frame);
 ```
 
-**Not:**  
+**而不是：**  
 
 ```objc
 CGRect frame = self.view.frame;
@@ -236,9 +238,9 @@ CGFloat height = frame.size.height;
 
 ## Constants
 
-Constants are preferred over in-line string literals or numbers, as they allow for easy reproduction of commonly used variables, and can be quickly changed without the need for find and replace. Constants should be declared as `static` constants and not `#define`s unless explicitly being used as a macro. 
+比起在程式碼裡直接寫入字串字面值或數字，較佳的作法是使用常數，這麼一來便能輕易地重複使用，想修改時也很方便，不需要大海撈針逐一更動。常數應宣告為`static`常數、而不是以`#define`定義，除非是作為巨集之用。
 
-**For example:**  
+**例如：**  
 
 ```objc
 static NSString * const NYTAboutViewControllerCompanyName = @"The New York Times Company";  
@@ -246,7 +248,7 @@ static NSString * const NYTAboutViewControllerCompanyName = @"The New York Times
 static const CGFloat NYTImageThumbnailHeight = 50.0;
 ```
 
-**Not:**  
+**而不是：**  
 
 ```objc
 #define CompanyName @"The New York Times Company"
@@ -256,9 +258,9 @@ static const CGFloat NYTImageThumbnailHeight = 50.0;
 
 ## Enumerated Types
 
-When using `enum`s, it is recommended to use the new fixed underlying type specification because it has stronger type checking and code completion. The SDK now includes a macro to facilitate and encourage use of fixed underlying types — `NS_ENUM()`
+使用`enum`時，建議使用擁有底層固定型別的新型宣告，因為可得到更佳的型別檢查與程式碼補齊功能；SDK裡含有巨集`NS_ENUM()`，方便我們加以運用。
 
-**Example:**  
+**例如：**  
 
 ```objc
 typedef NS_ENUM(NSInteger, NYTAdRequestState) {
@@ -269,9 +271,9 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
 
 ## Private Properties
 
-Private properties should be declared in class extensions (anonymous categories) in the implementation file of a class. Named categories (such as `NYTPrivate` or `private`) should never be used unless extending another class.
+私有屬性應宣告在類別實作檔裡的類別延伸（class extension）裡，也就是無名類目（anonymous category），不該使用有名的類目（例如`NYTPrivate`或`private`），除非你想要延伸擴充某類別。
 
-**For example:**  
+**例如：**  
 
 ```objc
 @interface NYTAdvertisement ()
@@ -285,29 +287,29 @@ Private properties should be declared in class extensions (anonymous categories)
 
 ## Image Naming
 
-Image names should be named consistently to preserve organization and developer sanity. They should be named as one camel case string with a description of their purpose, followed by the un-prefixed name of the class or property they are customizing (if there is one), followed by a further description of color and/or placement, and finally their state. 
+請務必讓圖檔名保持一致性，便於管理，才不會讓開發人員發瘋，應採用駝峰式大小寫命名法，首先詳細地描述出該圖檔的用途，然後跟著與它們相關、不帶有前置字串的類別名或屬性名（若有的話），然後跟著顏色、編排等資訊，最後是圖檔的狀態。
 
-**For example:**
+**例如：**
 
-* `RefreshBarButtonItem` / `RefreshBarButtonItem@2x` and `RefreshBarButtonItemSelected` / `RefreshBarButtonItemSelected@2x`
-* `ArticleNavigationBarWhite` / `ArticleNavigationBarWhite@2x` and `ArticleNavigationBarBlackSelected` / `ArticleNavigationBarBlackSelected@2x`. 
+* `RefreshBarButtonItem` / `RefreshBarButtonItem@2x` 和 `RefreshBarButtonItemSelected` / `RefreshBarButtonItemSelected@2x`
+* `ArticleNavigationBarWhite` / `ArticleNavigationBarWhite@2x` 和 `ArticleNavigationBarBlackSelected` / `ArticleNavigationBarBlackSelected@2x`. 
 
-Images that are used for a similar purpose should be grouped in respective groups in an Images folder.
+用途類似的圖檔，應置於Images目錄下，分門別類放在相對應的群組之下。
 
 ## Booleans
 
-Since `nil` resolves to `NO` it is unnecessary to compare it in conditions. Never compare something directly to `YES`, because `YES` is defined to 1 and a `BOOL` can be up to 8 bits. 
+因為`nil`會被決議成`NO`，所以在條件判斷時並必須要與之作比較。千萬不要將某物直接與`YES`作比較，因為`YES`被定義為1，而`BOOL`可能是8位元的任何值。
 
-This allows for more consistency across files and greater visual clarity. 
+遵守此規則的話，檔案間便能擁有更高的一致性，閱讀程式碼時也較清楚明白。
 
-**For example:**  
+**例如：**  
 
 ```objc
 if (!someObject) {
 }
 ```
 		
-**Not:**  
+**而不是：**  
 
 ```objc
 if (someObject == nil) {
@@ -316,31 +318,32 @@ if (someObject == nil) {
 
 -----
 
-**For a BOOL, here's two examples:**  
+**若是BOOL型別，底下有兩個例子：**  
 
 ```objc
 if (isAwesome)
 if (![someObject boolValue])
 ```
 
-**Not:** 
+**而不是：** 
 
 ```objc 
 if ([someObject boolValue] == NO)
-if (isAwesome == YES) // Never do this.
+if (isAwesome == YES) // 千萬別這麼寫
 ```
 
 -----
 
-If the name of a BOOL property is expressed as an adjective, the property can omit the “is” prefix but specifies the conventional name for the get accessor, for example:
+若BOOL屬性的名字是個形容詞，那麼可省略“is”前置字串，但可為取值子方法設定約定俗成的名稱，例如：
 
 ```objc
 @property (assign, getter=isEditable) BOOL editable;
 ```
-Text and example taken from the [Cocoa Naming Guidelines](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE).
+描述與範例取自[Cocoa Naming Guidelines](https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/CodingGuidelines/Articles/NamingIvarsAndTypes.html#//apple_ref/doc/uid/20001284-BAJGIIJE)。
 
 ## Singletons
 
+建立共享的單件物件時，應使用執行緒安全的寫法。
 Singleton objects should use a thread-safe pattern for creating their shared instance.
 ```objc
 + (instancetype)sharedInstance {
@@ -354,13 +357,13 @@ Singleton objects should use a thread-safe pattern for creating their shared ins
    return sharedInstance;
 }
 ```
-This will prevent [possible and sometimes prolific crashes] (http://cocoasamurai.blogspot.com/2011/04/singletons-your-doing-them-wrong.html).
+這麼做可免除[各種可能出現的臭蟲與錯誤] (http://cocoasamurai.blogspot.com/2011/04/singletons-your-doing-them-wrong.html)。
 
 ## Xcode project
 
-The physical files should be kept in sync with the Xcode project files in order to avoid file sprawl. Any Xcode groups created should be reflected by folders in the filesystem. Code should be grouped not only by type, but also by feature for greater clarity.
+實體檔案應隨時與Xcode專案檔保持同步，避免檔案四處流散；Xcode專案裡的群組（group）必須在檔案系統中有其相對應的目錄；不僅要根據類型區分程式碼，也要根據功能加以劃分，使之更為清晰。
 
-When possible, always turn on "Treat Warnings as Errors" in the target's Build Settings and enable as many [additional warnings](http://boredzo.org/blog/archives/2009-11-07/warnings) as possible. If you need to ignore a specific warning, use [Clang's pragma feature](http://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas).
+盡量啟用建構標的之Treat Warnings as Errors這項建構設定，並盡量啟用[額外的警告](http://boredzo.org/blog/archives/2009-11-07/warnings)，越多越好，若你需要忽略某一項特定的警告，可使用[Clang的pragma功能](http://clang.llvm.org/docs/UsersManual.html#controlling-diagnostics-via-pragmas)。
 
 # 其他關於Objective-C程式碼撰寫風格的手冊
 
