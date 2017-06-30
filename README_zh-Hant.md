@@ -18,11 +18,11 @@
 * [句點標記法的語法（Dot-Notation Syntax）](#dot-notation-syntax)
 * [空格與縮排（Spacing）](#spacing)
 * [條件判斷（Conditionals）](#conditionals)
-  * [三元運算子（Ternary Operator）](#ternary)
+  * [三元運算子（Ternary Operator）](#ternary)
 * [方法（Methods）](#methods)
 * [變數（Variables）](#variables)
 * [命名（Naming）](#naming)
-  * [類別（Categories）](#categories)
+  * [類別（Categories）](#categories)
 * [註解（Comments）](#comments)
 * [初始化與解構式（init and dealloc）](#init-and-dealloc)
 * [字面值（Literals）](#literals)
@@ -147,13 +147,13 @@ if (error) {
 
 **例如：**  
 
-*`NSString *title`：假設"標題"是一個字串是合理的。
-*`NSString *titleHTML`：這表示可能包含需要解析顯示的HTML的標題。 工程師需要符合"HTML"的格式才能有效地使用這個變數。
-*`NSAttributedString *titleAttributedString`：已經格式化顯示的標題。 _AttributedString_暗示這個值不僅僅是一個香草標題，根據上下文的不同，添加它可能是一個合理的選擇。
-*`NSDate *now`：No further clarification is needed.
-*`NSDate *lastModifiedDate`：Simply lastModified can be ambiguous; depending on context, one could reasonably assume it is one of a few different types.
-*`NSURL *URL` vs. `NSString *URLString`：In situations when a value can reasonably be represented by different classes, it is often useful to disambiguate in the variable’s name.
-*`NSString *releaseDateString`：Another example where a value could be represented by another class, and the name can help disambiguate.
+* `NSString *title`：假設"標題"是一個字串是合理的。
+* `NSString *titleHTML`：這表示可能包含需要解析顯示的HTML的標題。 工程師需要符合"HTML"的格式才能有效地使用這個變數。
+* `NSAttributedString *titleAttributedString`：已經格式化顯示的標題。 _AttributedString_暗示這個值不僅僅是一個香草標題，根據上下文的不同，添加它可能是一個合理的選擇。
+* `NSDate *now`：No further clarification is needed.
+* `NSDate *lastModifiedDate`：Simply lastModified can be ambiguous; depending on context, one could reasonably assume it is one of a few different types.
+* `NSURL *URL` vs. `NSString *URLString`：In situations when a value can reasonably be represented by different classes, it is often useful to disambiguate in the variable’s name.
+* `NSString *releaseDateString`：Another example where a value could be represented by another class, and the name can help disambiguate.
 
 
 盡量以淺顯易懂的方式命名變數，避免使用只有一個字元的變數名，除了在`for()`裡。
