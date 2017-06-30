@@ -18,20 +18,24 @@
 * [句點標記法的語法（Dot-Notation Syntax）](#dot-notation-syntax)
 * [空格與縮排（Spacing）](#spacing)
 * [條件判斷（Conditionals）](#conditionals)
+  * [三元運算子（Ternary Operator）](#ternary)
 * [方法（Methods）](#methods)
 * [變數（Variables）](#variables)
 * [命名（Naming）](#naming)
-  * [底線（Underscores）](#underscores)
+  * [類別（Categories）](#categories)
 * [註解（Comments）](#comments)
 * [初始化與解構式（init and dealloc）](#init-and-dealloc)
 * [字面值（Literals）](#literals)
 * [CGRect函式（CGRect Functions）](#cgrect-functions)
 * [常數（Constants）](#constants)
 * [列舉型別（Enumerated Types）](#enumerated-types)
+* [位掩碼（Bitmasks）](#bitmasks)
 * [私有屬性（Private Properties）](#private-properties)
 * [圖檔命名（Image Naming）](#image-naming)
 * [布林（Booleans）](#booleans)
 * [單件設計模式（Singletons）](#singletons)
+* [匯入（Imports）](#imports)
+* [協定（Protocols）](#protocols)
 * [Xcode專案（Xcode project）](#xcode-project)
 
 ## 句點標記法的語法（Dot-Notation Syntax）
@@ -64,7 +68,8 @@ else {
 //作事情
 }
 ```
-* 方法之間必須恰好相隔一個空白行，有助於程式碼整體組織性與視覺辨識。方法內也可用空白行區隔功能，但碰到這種情況時，通常就是該分出新方法的時候。
+* 方法之間必須恰好相隔一個空白行，有助於程式碼整體組織性與視覺辨識。
+* 方法內也可用空白行區隔功能，但碰到這種情況時，通常就是該分出新方法的時候。
 * 在實作裡的`@synthesize`與`@dynamic`，每個必須單獨宣告佔據一行。
 
 ## 條件判斷（Conditionals）
@@ -91,6 +96,42 @@ if (!error)
 if (!error) return success;
 ```
 
+## 三元運算子（Ternary Operator）
+
+三元運算子的目的`?`是為了讓程式碼的架構更清楚或程式碼的整齊。 三元運算子應該只對每個表達式設定單一個條件。 如果是多條件時用if會更加容易了解或對命名變數重構。
+
+**譬如：**
+```objc
+result = a > b ? x : y;
+```
+
+**而不是：**
+```objc
+result = a > b ? x = c > d ? c : d : y;
+```
+
+## 例外處理（Error Handling）
+
+當引用一個返回錯誤參數（error parameter）的方法時，應該針對返回值，而非錯誤變量。
+
+**譬如：**
+```objc
+NSError *error;
+if (![self trySomethingWithError:&error]) {
+    // Handle Error
+}
+```
+
+**而不是：**
+```objc
+NSError *error;
+[self trySomethingWithError:&error];
+if (error) {
+    // Handle Error
+}
+
+```
+
 ## 方法（Methods）
 
 方法宣告時，在-/+符號之後必須是一個空白。方法每個參數區段之間必須相隔一個空白。  
@@ -99,7 +140,21 @@ if (!error) return success;
 ```objc  
 - (void)setExampleText:(NSString *)text image:(UIImage *)image;
 ```
+
 ## 變數（Variables）
+
+變數應以描述性方式命名，變數的名稱清楚地傳達變數的內容以及工程師需要正確使用該值的相關訊息。
+
+**例如：**  
+
+*`NSString *title`：假設"標題"是一個字串是合理的。
+*`NSString *titleHTML`：這表示可能包含需要解析顯示的HTML的標題。 工程師需要符合"HTML"的格式才能有效地使用這個變數。
+*`NSAttributedString *titleAttributedString`：已經格式化顯示的標題。 _AttributedString_暗示這個值不僅僅是一個香草標題，根據上下文的不同，添加它可能是一個合理的選擇。
+*`NSDate *now`：No further clarification is needed.
+*`NSDate *lastModifiedDate`：Simply lastModified can be ambiguous; depending on context, one could reasonably assume it is one of a few different types.
+*`NSURL *URL` vs. `NSString *URLString`：In situations when a value can reasonably be represented by different classes, it is often useful to disambiguate in the variable’s name.
+*`NSString *releaseDateString`：Another example where a value could be represented by another class, and the name can help disambiguate.
+
 
 盡量以淺顯易懂的方式命名變數，避免使用只有一個字元的變數名，除了在`for()`裡。
 
@@ -308,7 +363,7 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
 if (!someObject) {
 }
 ```
-		
+    
 **而不是：**  
 
 ```objc
